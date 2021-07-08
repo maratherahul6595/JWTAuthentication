@@ -39,6 +39,9 @@ public class JWTController {
 		} catch (UsernameNotFoundException e) {
 			e.printStackTrace();
 			throw new Exception("Bad Credentials..");
+		}  catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Bad Credentials..");
 		}
 		
 		UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getUsername());
