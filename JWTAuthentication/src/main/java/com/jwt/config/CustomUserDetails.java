@@ -28,13 +28,15 @@ public class CustomUserDetails  implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		//return null;
+		return user.getPassword();//Added
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		//return null;
+		return user.getUsername();//Added
 	}
 
 	@Override
@@ -59,6 +61,11 @@ public class CustomUserDetails  implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomUserDetails [user=" + user + "]";
 	}
 
 }

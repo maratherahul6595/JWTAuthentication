@@ -29,7 +29,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	private JWTAuthenticationFilter jwtAuthenticationFilter;
 	
 	
-	
+	/* Old Changes Start*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -55,17 +55,23 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+	/* Old Changes End*/
 	/* New Changes Start*/
-	/*@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
+	/*@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// TODO Auto-generated method stub
+		http.csrf().disable()
+		.cors().disable()
+		.authorizeRequests().antMatchers("/token").permitAll()
+		.anyRequest().authenticated()
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
-	@Bean
-	public UserDetailsService getUserDetailService() {
-	
-		return new CustomUserDetailsService();
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(customUserDetailsService);
+		auth.authenticationProvider(authenticationProvider());
 	}
 
 	@Bean
@@ -75,27 +81,23 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
+	@Bean
+	public UserDetailsService getUserDetailService() {
+		return new CustomUserDetailsService();
+	}
+	
+	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		
 		DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(this.getUserDetailService());
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 		return daoAuthenticationProvider;
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
-		http.csrf().disable()
-		.cors().disable()
-		.authorizeRequests().antMatchers("/token").permitAll()
-		.anyRequest().authenticated()
-		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	}
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticationProvider());
 	}*/
+	
 	/* New Changes End*/
 }

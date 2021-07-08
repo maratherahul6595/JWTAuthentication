@@ -24,8 +24,8 @@ public class User {
 	private String name;
 	
 	@Column(unique = true)
-	@Email(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$")
-	private String email;
+	//@Email(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$")
+	private String username;
 	
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "Invalid password format. ex.Abcd@123")
 	private String password;
@@ -34,17 +34,16 @@ public class User {
 
 	public User() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id,
-			@NotBlank(message = "Name should not be blank") @Size(min = 2, max = 20, message = "min 2 and max 20 characters are allowed") String name,
-			@Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$") String email,
+	public User(int id, String name, String username,
 			@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Invalid password format. ex.Abcd@123") String password,
 			String role) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
+		this.username = username;
 		this.password = password;
 		this.role = role;
 	}
@@ -65,12 +64,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -91,8 +90,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ "]";
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", role="
+				+ role + "]";
 	}
+	
 	
 }

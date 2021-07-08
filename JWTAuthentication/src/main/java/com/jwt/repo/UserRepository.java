@@ -9,7 +9,7 @@ import com.jwt.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	@Query("select u from User u where u.email=:email")
-	public User getUserByUserName(@Param("email") String email);
+	@Query("select u from User u where u.username=:username")
+	public User getUserByUserName(@Param("username") String username);
 	
 }
